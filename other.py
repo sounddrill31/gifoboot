@@ -19,3 +19,4 @@ def ratio(out):
                             img = Image.open(j.path)
                             return img.size[0] / float(img.size[1])
     return None
+    
