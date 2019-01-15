@@ -4,10 +4,8 @@ from optparse import OptionParser
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile, ZIP_STORED
 
+from funcs import splitter, mirror, desc
 from other import new_part, ratio
-from splitter import splitter
-from mirror import mirror
-from desc import desc
 
 usage = 'usage: %prog [options] filename fps'
 description = 'Input a GIF file, get a bootanimation.zip of it.'
