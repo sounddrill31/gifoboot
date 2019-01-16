@@ -12,6 +12,14 @@ description = 'Input a GIF file, get a bootanimation.zip of it.'
 prsr = OptionParser(usage=usage, description=description)
 
 prsr.add_option(
+    '-m',
+    '--mirror',
+    default = False,
+    dest    = 'mirror',
+    action  = 'store_true',
+    help    = 'mirror the gif so it will be a perfect loop'
+)
+prsr.add_option(
     '-f',
     '--fps',
     default = -1,
@@ -21,21 +29,12 @@ prsr.add_option(
     help    = 'specify a framerate (by default it will try to get it automatically, if it fails it will ask for manual input)',
 )
 prsr.add_option(
-    '-m',
-    '--mirror',
-    default = False,
-    dest    = 'mirror',
-    action  = 'store_true',
-    help    = 'mirror the gif so it will be a perfect loop'
-)
-prsr.add_option(
     '-r',
     '--res',
     default = 1080,
     dest    = 'res',
     type    = 'int',
     action  = 'store',
-    metavar = 'RESOLUTION',
     help    = 'specify a resolution (only needs width, default is 1080)'
 )
 
