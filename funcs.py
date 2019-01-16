@@ -11,7 +11,7 @@ def splitter(gif, out):
             frame.seek(n)
         except EOFError:
             break
-            
+
     return out
 
 
@@ -34,11 +34,7 @@ def mirror(path):
 def desc(out, width, height, fps):
     import os
 
-    parts = []
-    with os.scandir(out) as files:
-        for i in files:
-            if i.is_dir() and i.name.startswith('part'):
-                parts.append(i.name)
+    parts = [i.name for i in os.scandir(out) if i.is_dir() and i.name.startswith('part')]
     with open(f'{out}/desc.txt', 'w') as txt:
         txt.write(f'{width} {height} {fps}\n')
         for i in parts:
