@@ -12,6 +12,15 @@ description = 'Input a GIF file, get a bootanimation.zip of it.'
 prsr = OptionParser(usage=usage, description=description)
 
 prsr.add_option(
+    '-f',
+    '--fps',
+    default = -1,
+    dest    = 'fps',
+    type    = 'int',
+    action  = 'store',
+    help    = 'specify a framerate (by default it will try to get it automatically, if it fails it will ask for manual input)',
+)
+prsr.add_option(
     '-m',
     '--mirror',
     default = False,
@@ -33,11 +42,17 @@ prsr.add_option(
 (options, args) = prsr.parse_args()
 
 with TemporaryDirectory() as out:
-    gif, fps = args[0], args[1]
-    p0 = splitter(gif, new_part(out))
+    gif = args[0]
+    px, fps = splitter(gif, new_part(out))
     if options.mirror:
-        mirror(p0)
+        mirror(px)
     w, h = options.res, int(options.res / ratio(out))
+    if options.fps != -1:
+        fps = options.fps
+    elif fps is None:
+        fps = int(input("Couldn't detect framerate, please enter it now: "))
+    else:
+        print(f'Detected framerate: {fps}')
     desc(out, w, h, fps)
 
     with ZipFile('bootanimation.zip', 'w', ZIP_STORED) as zp:

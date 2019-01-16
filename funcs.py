@@ -1,18 +1,21 @@
 def splitter(gif, out):
-    from PIL import Image
-  # https://gist.github.com/revolunet/848913
+    from collections import Counter
+    from PIL import Image, ImageSequence
 
-    frame = Image.open(gif)
+    f = Image.open(gif)
     n = 0
-    while frame:
-        frame.save(f'{out}/{n:04d}.png', 'PNG')
+    d = []
+    for frame in ImageSequence.Iterator(f):
         n += 1
-        try:
-            frame.seek(n)
-        except EOFError:
-            break
+        d.append(frame.info['duration'])
+        frame.save(f'{out}/{n:04d}.png', 'PNG')
+    fps = None
+    c = Counter(d)
+    m = c.most_common(2)
+    if len(m) == 1 or m[0][1] >= (n/4)*3:
+        fps = int(1000 / m[0][0])
 
-    return out
+    return out, fps
 
 
 def mirror(path):
