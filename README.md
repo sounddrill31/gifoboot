@@ -1,28 +1,15 @@
 # gifoboot
 
 This script converts GIF files to Android boot animations.
-Requires PIL to be installed.
-
+Requires [Pillow](https://github.com/python-pillow/Pillow) to be installed:
 ```
-$ python3 main.py --help
+$ pip install Pillow
 ```
+To use, run for example:
 ```
-Usage: main.py [options] filename fps
-
-Input a GIF file, get a bootanimation.zip of it.
-
-Options:
-  -h, --help            show this help message and exit
-  -m, --mirror          mirror the gif so it will be a perfect loop
-  -r RESOLUTION, --res=RESOLUTION
-                        specify a resolution (only needs width, default is
-                        1080)
+$ python3 main.py ./funny.gif 30
 ```
-For example:
-```
-$ python3 main.py funny.gif 30
-```
-will output a `bootanimation.zip` with `funny.gif` running at 30 fps. By defalt the width is set to `1080`, that can be changed with `-r`. Sometimes it's nice to have a gif mirrored the other way around, so it will be a perfect loop, and you can do that with `-m`.
+This will output a `bootanimation.zip` with `funny.gif` running at 30 fps. By defalt the width is set to `1080`, that can be changed with `-r`. Sometimes it's nice to have the `gif` mirrored the other way around, so it will be a perfect loop, and you can do that with `-m`.
 
 TODO:
 - `-c` to set it to complete at least one loop
@@ -33,3 +20,4 @@ TODO:
 - windows compatibility
 
 > Also, there's some stuff [here](https://rastamanjohn.gq/bootanimations/).
+> And thanks to @Lonami for all the help in the comments!
